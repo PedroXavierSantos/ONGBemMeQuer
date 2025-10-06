@@ -1,0 +1,27 @@
+# Configurações locais
+local.properties
+google-services.json
+*.keystore
+*.jks
+
+# Arquivos temporários e de sistema
+*.iml
+.DS_Store
+
+# Pastas de build e cache
+.gradle
+/local.properties
+/.idea
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+/build
+/captures
+/app/build
+.externalNativeBuild
+.cxx
+

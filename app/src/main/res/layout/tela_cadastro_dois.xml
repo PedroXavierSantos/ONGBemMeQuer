@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cadastroDois"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".cadastroDois">
+
+    <!--Checar de incluir um ScrollView na tela-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/cadastre_se"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="@color/roxo_bem_me_quer"
+            android:layout_marginBottom="16dp">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="331dp"
+            android:layout_height="45dp"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numero1"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <SeekBar
+                android:id="@+id/seekBar2"
+                android:layout_width="308dp"
+                android:layout_height="33dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/numero2"
+                android:textColor="#999999"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <!--Caixas de digitação para o usuário-->
+        <EditText
+            android:id="@+id/editNamePacient"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borda_caixa_texto_cream"
+            android:padding="18dp"
+            android:hint="@string/nomePaciente"
+            android:inputType="textPersonName"
+            android:autofillHints="name"/>
+        <EditText
+            android:id="@+id/editDescriptionPacient"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borda_caixa_texto_cream"
+            android:layout_marginTop="15dp"
+            android:padding="18dp"
+            android:hint="@string/descricaoPaciente"
+            android:inputType="text"
+            android:autofillHints="description"/>
+        <EditText
+            android:id="@+id/editIntentions"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/borda_caixa_texto_cream"
+            android:layout_marginTop="15dp"
+            android:padding="18dp"
+            android:hint="@string/intencoes"
+            android:inputType="text"
+            android:autofillHints="description"/>
+
+        <!--Botão para ir a Tela de Login-->
+        <Button
+            android:id="@+id/btn_checar"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/roxo_bem_me_quer"
+            android:textColor="@color/white"
+            android:text="@string/checar"/>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

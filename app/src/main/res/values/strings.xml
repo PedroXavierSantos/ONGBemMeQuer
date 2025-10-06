@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">BemMeQuer</string>
+    <string name="cadastroUsuario">Cadastro de Usuário</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="mostrarSenha">Mostrar Senha</string>
+    <string name="confirmarSenha">Confirmar Senha</string>"
+    <string name="entrar">Entrar</string>
+    <string name="proximo">Próximo</string>
+    <string name="checar">Checar</string>
+    <string name="Sair">Sair</string>
+    <string name="descricaoLogoOng">Logo da ONG</string>
+    <string name="cadastre_se">Cadastre-se</string>
+    <string name="nomeResponsavel">Nome Responsável</string>
+    <string name="nomePaciente">Nome Paciente</string>
+    <string name="descricaoPaciente">Descrição do Paciente</string>
+    <string name="intencoes">Intenções com a ONG</string>
+    <string name="numeroTelefone">Numero Telefone</string>
+    <string name="numero1">1</string>
+    <string name="numero2">2</string>
+</resources>
