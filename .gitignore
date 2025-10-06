@@ -1,27 +1,45 @@
-# Configurações locais
+# ===============================
+# CONFIGURAÇÕES LOCAIS E SENSÍVEIS
+# ===============================
 local.properties
-google-services.json
+app/google-services.json
 *.keystore
 *.jks
 
-# Arquivos temporários e de sistema
+# ===============================
+# ARQUIVOS TEMPORÁRIOS E DE SISTEMA
+# ===============================
 *.iml
 .DS_Store
+*.log
 
-# Pastas de build e cache
-.gradle
-/local.properties
-/.idea
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+# ===============================
+# PASTAS DE BUILD E CACHE
+# ===============================
+.gradle/
+build/
+app/build/
+captures/
+.externalNativeBuild/
+.cxx/
 
-/build
-/captures
-/app/build
-.externalNativeBuild
-.cxx
+# ===============================
+# CONFIGURAÇÕES DO ANDROID STUDIO
+# ===============================
+.idea/
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
 
+# ===============================
+# OUTROS
+# ===============================
+# Evita sincronizar binários e APKs gerados
+*.apk
+*.ap_
+
+# Evita sincronizar backups automáticos
+*.bak
