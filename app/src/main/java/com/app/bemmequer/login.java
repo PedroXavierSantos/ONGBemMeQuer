@@ -27,10 +27,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class login extends AppCompatActivity {
+    // 1. DECLARAÇÃO DAS VARIÁVEIS (COMPONENTES DA TELA)
    private EditText editEmail;
    private EditText editTextSenha;
    private Button btn_login;
    private TextView textCadastre_se;
+   private CheckBox checkbox;
    private FirebaseAuth mAuth;
 
 
@@ -39,55 +41,47 @@ public class login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.tela_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        configurarInsets(); //Método para cuidas das barras do sistema
 
-        //Chamada das variáveis
+        inicializarComponentes();
+        configurarListeners();
+        }
+
+
+    //MÉTODOS DE ORGANIZAÇÃO
+    //Método que inicializa as variáveis, conectando com os IDs do layout XML
+    private void inicializarComponentes() {
         mAuth = FirebaseAuth.getInstance();
         editEmail = findViewById(R.id.editEmail);
         editTextSenha = findViewById(R.id.editTextSenha);
         textCadastre_se = findViewById(R.id.textCadastre_se);
         btn_login = findViewById(R.id.btn_login);
+        checkbox = findViewById(R.id.checkBox);
+    }
 
-        //Função do Botão Login
+
+    //Método que configura todas as ações de clique e interação do usuário
+    private void configurarListeners(){
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Capturo a entrada de texto do usuário
-                String email = editEmail.getText().toString();
-                String senha = editTextSenha.getText().toString();
-
-                //Verificação se os campos estão vazios
-                if (!TextUtils.isEmpty(email) || !TextUtils.isEmpty(senha)) {
-                    mAuth.signInWithEmailAndPassword(email, senha) //Consulta dos dados que o usuário digitou no banco de dados
-                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) { //checa se está com dados de acesso certos e envia para a tela principal
-                                    if (task.isSuccessful()) {
-                                        abrirTelaPrincipal();
-                                    } else {
-                                        //caso esteja errado ele mostra a mensagem de erro
-                                        String error = task.getException().getMessage();
-                                        Toast.makeText(login.this, "" +error, Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                }
+                validarDadosLogin(); //chama o método de validação
             }
         });
 
 
+    //Listener para o link "Cadastre-se"
+    textCadastre_se.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(login.this, cadastroUm.class);
+            startActivity(intent);
+        }
+    });
 
-        //CheckBox(mostrar senha)
-        CheckBox checkBox; // identificação da biblioteca e nome da variável
-        EditText editTextSenha;
-        checkBox = findViewById(R.id.checkBox);
-        editTextSenha = findViewById(R.id.editTextSenha);
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+    //Método para o CheckBox (mostrar senha)
+        checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
@@ -99,9 +93,54 @@ public class login extends AppCompatActivity {
         });
     }
 
+
+    //MÉTODOS DE AÇÃO
+    //Método que valida os dados de login do usuário
+    private void validarDadosLogin() {
+        String email = editEmail.getText().toString().trim();
+        String senha = editTextSenha.getText().toString().trim();
+
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Por favor, insira um e-mail válido.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(senha)){
+            Toast.makeText(this, "Por favor, insira uma senha válida.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        fazerLoginFirebase(email, senha);
+    }
+
+    //Método se comunica com o Firebase para autenticar o usuário
+    private void fazerLoginFirebase(String email, String senha) {
+        mAuth.signInWithEmailAndPassword(email, senha)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            abrirTelaPrincipal();
+                        } else {
+                            String error = task.getException().getMessage();
+                            Toast.makeText(login.this, "Erro: " + error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    //Método que abre a tela principal
     private void abrirTelaPrincipal() {
         Intent intent = new Intent(login.this, telaPrincipal.class);
         startActivity(intent);
         finish();
+    }
+
+
+    //Método auxiliar para configurar o espaçamento das barras do sistema
+    private void configurarInsets(){
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.login), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
     }
 }
