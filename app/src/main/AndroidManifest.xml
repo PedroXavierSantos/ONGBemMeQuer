@@ -13,16 +13,19 @@
         android:theme="@style/Theme.BemMeQuer"
         tools:targetApi="31">
         <activity
-            android:name=".cadastroDois"
+            android:name=".MainFuncionarioActivity"
             android:exported="false" />
         <activity
-            android:name=".cadastroUm"
+            android:name=".cadastroDoisActivity"
             android:exported="false" />
         <activity
-            android:name=".telaPrincipal"
+            android:name=".cadastroUmActivity"
             android:exported="false" />
         <activity
-            android:name=".login"
+            android:name=".mainPacienteActivity"
+            android:exported="false" />
+        <activity
+            android:name=".loginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

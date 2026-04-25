@@ -10,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class cadastroDois extends AppCompatActivity {
+public class cadastroDoisActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +24,6 @@ public class cadastroDois extends AppCompatActivity {
         });
         //Variavel local
         Button btn_checar = findViewById(R.id.btn_checar);
-        btn_checar.setOnClickListener(view -> startActivity(new Intent(this, login.class)));
+        btn_checar.setOnClickListener(view -> startActivity(new Intent(this, loginActivity.class)));
     }
 }

@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class telaPrincipal extends AppCompatActivity {
+public class mainPacienteActivity extends AppCompatActivity {
 //Firebase
 private FirebaseAuth mAuth;
 private Button btn_logout_telaprincipal;
@@ -23,7 +23,7 @@ private Button btn_logout_telaprincipal;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.tela_principal);
+        setContentView(R.layout.activity_main_paciente);
         //Inicializa o Firebase Auth e a variável do botão de Logout
         mAuth = FirebaseAuth.getInstance();
         btn_logout_telaprincipal = findViewById(R.id.btn_logout_telaprincipal);
@@ -33,7 +33,7 @@ private Button btn_logout_telaprincipal;
             @Override
             public void onClick(View v) {
                 mAuth.signOut(); //Desloga o usuário do Firebase Auth
-                Intent intent = new Intent(telaPrincipal.this, login.class); //Retorna para a tela de Login
+                Intent intent = new Intent(mainPacienteActivity.this, loginActivity.class); //Retorna para a tela de Login
                 startActivity(intent); //Inicia a tela de Login
                 finish(); //Finaliza a tela atual
             }
@@ -54,7 +54,7 @@ private Button btn_logout_telaprincipal;
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser == null) {
-            Intent intent = new Intent(telaPrincipal.this, login.class);
+            Intent intent = new Intent(mainPacienteActivity.this, loginActivity.class);
             startActivity(intent);
             finish();
         }}

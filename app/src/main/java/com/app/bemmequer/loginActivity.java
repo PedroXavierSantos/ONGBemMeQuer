@@ -26,8 +26,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class login extends AppCompatActivity {
-    // 1. DECLARAÇÃO DAS VARIÁVEIS (COMPONENTES DA TELA)
+public class loginActivity extends AppCompatActivity {
+    //DECLARAÇÃO DAS VARIÁVEIS (COMPONENTES DA TELA)
    private EditText editEmail;
    private EditText editTextSenha;
    private Button btn_login;
@@ -74,7 +74,7 @@ public class login extends AppCompatActivity {
     textCadastre_se.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(login.this, cadastroUm.class);
+            Intent intent = new Intent(loginActivity.this, cadastroUmActivity.class);
             startActivity(intent);
         }
     });
@@ -121,7 +121,7 @@ public class login extends AppCompatActivity {
                             abrirTelaPrincipal();
                         } else {
                             String error = task.getException().getMessage();
-                            Toast.makeText(login.this, "Erro: " + error, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(loginActivity.this, "Erro: " + error, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -129,7 +129,7 @@ public class login extends AppCompatActivity {
 
     //Método que abre a tela principal
     private void abrirTelaPrincipal() {
-        Intent intent = new Intent(login.this, telaPrincipal.class);
+        Intent intent = new Intent(loginActivity.this, mainPacienteActivity.class);
         startActivity(intent);
         finish();
     }

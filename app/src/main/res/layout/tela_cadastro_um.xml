@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".cadastroUm">
+    tools:context=".cadastroUmActivity">
 
     <!--Checar de incluir um ScrollView na tela-->
     <LinearLayout
@@ -52,7 +52,7 @@
 
         <!--Caixas de digitação para o usuário-->
         <EditText
-            android:id="@+id/editNamePerson"
+            android:id="@+id/editNomePessoa"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:background="@drawable/borda_caixa_texto_cream"
@@ -61,7 +61,7 @@
             android:inputType="textPersonName"
             android:autofillHints="name"/>
         <EditText
-            android:id="@+id/editNumberPhone"
+            android:id="@+id/editNumeroTelefone"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:background="@drawable/borda_caixa_texto_cream"
@@ -71,7 +71,7 @@
             android:inputType="phone"
             android:autofillHints="phone"/>
         <EditText
-            android:id="@+id/editNewEmail"
+            android:id="@+id/editEmail"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:background="@drawable/borda_caixa_texto_cream"
@@ -81,7 +81,7 @@
             android:inputType="textEmailAddress"
             android:autofillHints="emailAddress"/>
         <EditText
-            android:id="@+id/editNewPassword"
+            android:id="@+id/editSenha"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:background="@drawable/borda_caixa_texto_cream"
@@ -91,7 +91,7 @@
             android:inputType="textPassword"
             android:autofillHints="password"/>
         <EditText
-            android:id="@+id/confirmNewPassword"
+            android:id="@+id/confirmarSenha"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:background="@drawable/borda_caixa_texto_cream"
