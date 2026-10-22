@@ -5,10 +5,10 @@
     <string name="email">Email</string>
     <string name="senha">Senha</string>
     <string name="mostrarSenha">Mostrar Senha</string>
-    <string name="confirmarSenha">Confirmar Senha</string>"
+    <string name="confirmarSenha">Confirmar Senha</string>
     <string name="entrar">Entrar</string>
     <string name="proximo">Próximo</string>
-    <string name="checar">Checar</string>
+    <string name="finalizarCadastro">Finalizar Cadastro</string>
     <string name="Sair">Sair</string>
     <string name="descricaoLogoOng">Logo da ONG</string>
     <string name="cadastre_se">Cadastre-se</string>
@@ -19,4 +19,23 @@
     <string name="numeroTelefone">Numero Telefone</string>
     <string name="numero1">1</string>
     <string name="numero2">2</string>
+
+    <string name="emBreve">Em breve</string>
+    <string name="cadastroConcluido">Cadastro realizado com sucesso!</string>
+
+    <!--Mensagens de validação e de erro-->
+    <string name="erroCampoObrigatorio">Campo obrigatório</string>
+    <string name="erroEmailInvalido">Por favor, insira um e-mail válido.</string>
+    <string name="erroLoginSenha">Por favor, insira sua senha.</string>
+    <string name="erroTelefoneInvalido">Informe um telefone válido com DDD</string>
+    <string name="erroSenhaCurta">A senha deve ter pelo menos 6 caracteres</string>
+    <string name="erroSenhasDiferentes">As senhas não conferem</string>
+    <string name="erroCredenciais">E-mail ou senha incorretos.</string>
+    <string name="erroEmailEmUso">Este e-mail já está cadastrado.</string>
+    <string name="erroSenhaFraca">Senha muito fraca. Use pelo menos 6 caracteres.</string>
+    <string name="erroSemConexao">Sem conexão com a internet. Tente novamente.</string>
+    <string name="erroMuitasTentativas">Muitas tentativas. Aguarde alguns minutos e tente novamente.</string>
+    <string name="erroCarregarPerfil">Não foi possível carregar seu perfil. Tente novamente.</string>
+    <string name="erroSalvarCadastro">Não foi possível concluir o cadastro. Tente novamente.</string>
+    <string name="erroGenerico">Ocorreu um erro. Tente novamente.</string>
 </resources>

@@ -5,6 +5,19 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFuncionarioActivity">
+    android:background="@color/white"
+    tools:context=".ui.MainFuncionarioActivity">
+
+    <Button
+        android:id="@+id/btn_logout_funcionario"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/roxo_bem_me_quer"
+        android:textColor="@color/white"
+        android:text="@string/Sair"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

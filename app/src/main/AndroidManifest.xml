@@ -13,19 +13,19 @@
         android:theme="@style/Theme.BemMeQuer"
         tools:targetApi="31">
         <activity
-            android:name=".MainFuncionarioActivity"
+            android:name=".ui.MainFuncionarioActivity"
             android:exported="false" />
         <activity
-            android:name=".cadastroDoisActivity"
+            android:name=".ui.cadastroDoisActivity"
             android:exported="false" />
         <activity
-            android:name=".cadastroUmActivity"
+            android:name=".ui.cadastroUmActivity"
             android:exported="false" />
         <activity
-            android:name=".mainPacienteActivity"
+            android:name=".ui.mainPacienteActivity"
             android:exported="false" />
         <activity
-            android:name=".loginActivity"
+            android:name=".ui.loginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

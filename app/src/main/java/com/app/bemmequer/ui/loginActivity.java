@@ -1,10 +1,11 @@
-package com.app.bemmequer;
+package com.app.bemmequer.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,16 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.app.bemmequer.R;
+import com.app.bemmequer.auth.AuthManager;
+import com.app.bemmequer.data.UsuarioRepository;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
+
 
 
 public class loginActivity extends AppCompatActivity {
@@ -33,7 +33,8 @@ public class loginActivity extends AppCompatActivity {
    private Button btn_login;
    private TextView textCadastre_se;
    private CheckBox checkbox;
-   private FirebaseAuth mAuth;
+   private AuthManager authManager;
+   private UsuarioRepository usuarioRepository;
 
 
     @Override
@@ -48,15 +49,16 @@ public class loginActivity extends AppCompatActivity {
         }
 
 
-    //MÉTODOS DE ORGANIZAÇÃO
+
     //Método que inicializa as variáveis, conectando com os IDs do layout XML
     private void inicializarComponentes() {
-        mAuth = FirebaseAuth.getInstance();
         editEmail = findViewById(R.id.editEmail);
         editTextSenha = findViewById(R.id.editTextSenha);
         textCadastre_se = findViewById(R.id.textCadastre_se);
         btn_login = findViewById(R.id.btn_login);
         checkbox = findViewById(R.id.checkBox);
+        authManager = new AuthManager();
+        usuarioRepository = new UsuarioRepository();
     }
 
 
@@ -94,18 +96,29 @@ public class loginActivity extends AppCompatActivity {
     }
 
 
+    //Se o usuário já estiver logado, pula a tela de login e vai direto para a tela principal
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String uid = authManager.getUid();
+        if (uid != null) {
+            direcionarUsuario(uid);
+        }
+    }
+
+
     //MÉTODOS DE AÇÃO
     //Método que valida os dados de login do usuário
     private void validarDadosLogin() {
         String email = editEmail.getText().toString().trim();
-        String senha = editTextSenha.getText().toString().trim();
+        String senha = editTextSenha.getText().toString(); //A senha não usa trim(), espaços fazem parte dela
 
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Por favor, insira um e-mail válido.", Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(email) || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            Toast.makeText(this, R.string.erroEmailInvalido, Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(senha)){
-            Toast.makeText(this, "Por favor, insira uma senha válida.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.erroLoginSenha, Toast.LENGTH_SHORT).show();
             return;
         }
         fazerLoginFirebase(email, senha);
@@ -113,23 +126,40 @@ public class loginActivity extends AppCompatActivity {
 
     //Método se comunica com o Firebase para autenticar o usuário
     private void fazerLoginFirebase(String email, String senha) {
-        mAuth.signInWithEmailAndPassword(email, senha)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            abrirTelaPrincipal();
-                        } else {
-                            String error = task.getException().getMessage();
-                            Toast.makeText(loginActivity.this, "Erro: " + error, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+        btn_login.setEnabled(false); //Evita cliques repetidos enquanto o login é feito
+        authManager.login(email, senha, task -> {
+            if (task.isSuccessful()) {
+                direcionarUsuario(authManager.getUid());
+            } else {
+                btn_login.setEnabled(true);
+                Toast.makeText(loginActivity.this, AuthManager.mensagemErro(task.getException()), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
-    //Método que abre a tela principal
-    private void abrirTelaPrincipal() {
-        Intent intent = new Intent(loginActivity.this, mainPacienteActivity.class);
+    //Método que consulta o tipo do usuário no Firestore e abre a tela de funcionário ou de paciente
+    private void direcionarUsuario(String uid) {
+        btn_login.setEnabled(false);
+        usuarioRepository.buscarUsuario(uid, task -> {
+            if (!task.isSuccessful()) {
+                //Sem o perfil não sabemos para qual tela ir, então desloga para tentar de novo
+                authManager.logout();
+                btn_login.setEnabled(true);
+                Toast.makeText(loginActivity.this, R.string.erroCarregarPerfil, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            String tipo = task.getResult().getString(UsuarioRepository.CAMPO_TIPO);
+            if (UsuarioRepository.TIPO_FUNCIONARIO.equals(tipo)) {
+                abrirTela(MainFuncionarioActivity.class);
+            } else {
+                abrirTela(mainPacienteActivity.class);
+            }
+        });
+    }
+
+    //Método que abre a tela principal e fecha a tela de login
+    private void abrirTela(Class<?> tela) {
+        Intent intent = new Intent(loginActivity.this, tela);
         startActivity(intent);
         finish();
     }
