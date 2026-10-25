@@ -15,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.app.bemmequer.R;
 
+import java.util.Locale;
+
 public class cadastroUmActivity extends AppCompatActivity {
     //Chaves usadas para enviar os dados desta tela para a segunda tela do cadastro
     public static final String EXTRA_NOME_RESPONSAVEL = "nomeResponsavel";
@@ -66,7 +68,7 @@ public class cadastroUmActivity extends AppCompatActivity {
     private void validarDados() {
         String nome = editNomePessoa.getText().toString().trim();
         String telefone = editNumeroTelefone.getText().toString().trim();
-        String email = editEmail.getText().toString().trim();
+        String email = editEmail.getText().toString().trim().toLowerCase(Locale.ROOT);
         String senha = editSenha.getText().toString(); //A senha não usa trim(), espaços fazem parte dela
         String senhaConfirmada = confirmarSenha.getText().toString();
 
