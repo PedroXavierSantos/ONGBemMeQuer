@@ -1,0 +1,70 @@
+rules_version = '2';
+
+// Regras de segurança do Cloud Firestore do app Bem Me Quer.
+// Tudo que não for liberado explicitamente aqui é NEGADO.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // FUNÇÕES AUXILIARES
+    function estaLogado() {
+      return request.auth != null;
+    }
+
+    function ehOProprioUsuario(uid) {
+      return estaLogado() && request.auth.uid == uid;
+    }
+
+    // Funcionário = usuário cujo documento em /usuarios tem tipo "funcionario".
+    // Esse documento só pode ser criado pela administração (console do Firebase).
+    function ehFuncionario() {
+      return estaLogado()
+        && get(/databases/$(database)/documents/usuarios/$(request.auth.uid)).data.tipo == 'funcionario';
+    }
+
+    function textoValido(valor, tamanhoMaximo) {
+      return valor is string && valor.size() <= tamanhoMaximo;
+    }
+
+    function textoObrigatorio(valor, tamanhoMaximo) {
+      return textoValido(valor, tamanhoMaximo) && valor.size() > 0;
+    }
+
+    // Campos que o próprio paciente pode preencher e editar
+    function camposEditaveisValidos(dados) {
+      return textoObrigatorio(dados.nomeResponsavel, 100)
+        && textoObrigatorio(dados.telefone, 20)
+        && textoObrigatorio(dados.nomePaciente, 100)
+        && textoValido(dados.descricaoPaciente, 1000)
+        && textoValido(dados.intencoes, 1000);
+    }
+
+    // USUÁRIOS: usuarios/{uid}
+    match /usuarios/{uid} {
+      // Cada usuário lê o próprio perfil; funcionários leem todos (acompanhamento dos atendidos)
+      allow read: if ehOProprioUsuario(uid) || ehFuncionario();
+
+      // Cadastro feito pelo app: sempre como PACIENTE, com o e-mail da própria conta
+      allow create: if ehOProprioUsuario(uid)
+        && request.resource.data.keys().hasOnly([
+             'tipo', 'nomeResponsavel', 'telefone', 'email',
+             'nomePaciente', 'descricaoPaciente', 'intencoes', 'criadoEm'])
+        && request.resource.data.keys().hasAll([
+             'tipo', 'nomeResponsavel', 'telefone', 'email',
+             'nomePaciente', 'descricaoPaciente', 'intencoes', 'criadoEm'])
+        && request.resource.data.tipo == 'paciente'
+        && request.resource.data.email is string
+        && request.resource.data.email.lower() == request.auth.token.email.lower()
+        && request.resource.data.criadoEm == request.time
+        && camposEditaveisValidos(request.resource.data);
+
+      // Edição do próprio perfil: tipo, e-mail e data de criação nunca mudam
+      allow update: if ehOProprioUsuario(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+             'nomeResponsavel', 'telefone', 'nomePaciente', 'descricaoPaciente', 'intencoes'])
+        && camposEditaveisValidos(request.resource.data);
+
+      // Exclusão de contas só pela administração
+      allow delete: if false;
+    }
+  }
+}

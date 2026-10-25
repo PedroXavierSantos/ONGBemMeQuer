@@ -1,0 +1,17 @@
+{
+  "name": "bemmequer-firebase",
+  "version": "1.0.0",
+  "description": "Configuração do Firebase (regras do Firestore e emuladores) do app Bem Me Quer",
+  "scripts": {
+    "emuladores": "firebase emulators:start",
+    "test:regras": "firebase emulators:exec --only firestore --project demo-bemmequer \"node --test tests/*.test.js\"",
+    "deploy:regras": "firebase deploy --only firestore:rules,firestore:indexes"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@firebase/rules-unit-testing": "^4.0.1",
+    "firebase": "^11.10.0",
+    "firebase-tools": "^14.27.0"
+  },
+  "private": true
+}
