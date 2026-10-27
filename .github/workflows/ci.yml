@@ -1,0 +1,99 @@
+# Testes automáticos que rodam no GitHub a cada Pull Request e a cada push na main.
+# O resultado aparece no próprio PR (✅ ou ❌) antes do merge.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Se um novo push chegar na mesma branch, cancela a execução antiga
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android:
+    name: Build e testes do app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      # O google-services.json real não vai para o GitHub (.gitignore).
+      # Este arquivo de mentira só serve para o app compilar; nada aqui acessa o Firebase.
+      - name: Criar google-services.json de teste
+        run: |
+          cat > app/google-services.json <<'EOF'
+          {
+            "project_info": {
+              "project_number": "000000000000",
+              "project_id": "demo-bemmequer",
+              "storage_bucket": "demo-bemmequer.appspot.com"
+            },
+            "client": [
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:000000000000:android:0000000000000000",
+                  "android_client_info": { "package_name": "com.app.bemmequer" }
+                },
+                "oauth_client": [],
+                "api_key": [{ "current_key": "chave-de-teste-do-ci" }],
+                "services": { "appinvite_service": { "other_platform_oauth_client": [] } }
+              }
+            ],
+            "configuration_version": "1"
+          }
+          EOF
+
+      - name: Compilar o app
+        run: ./gradlew assembleDebug
+
+      - name: Rodar os testes unitários
+        run: ./gradlew testDebugUnitTest
+
+  regras-firestore:
+    name: Testes das regras do Firestore
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Só roda quando a pasta firebase/ existe na branch
+      - name: Verificar se há regras para testar
+        id: verificar
+        run: |
+          if [ -f firebase/package.json ]; then
+            echo "existe=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "Pasta firebase/ não encontrada, nada para testar."
+          fi
+
+      # O emulador do Firestore precisa de Java
+      - if: steps.verificar.outputs.existe == 'true'
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - if: steps.verificar.outputs.existe == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: firebase/package-lock.json
+
+      - name: Instalar dependências
+        if: steps.verificar.outputs.existe == 'true'
+        working-directory: firebase
+        run: npm ci
+
+      - name: Rodar os testes das regras
+        if: steps.verificar.outputs.existe == 'true'
+        working-directory: firebase
+        run: npm run test:regras
