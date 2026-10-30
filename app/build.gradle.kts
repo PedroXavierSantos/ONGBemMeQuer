@@ -17,8 +17,19 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
+        debug {
+            // Para usar os emuladores locais do Firebase: ./gradlew installDebug -PusarEmuladorFirebase=true
+            val usarEmulador = project.findProperty("usarEmuladorFirebase")?.toString() == "true"
+            buildConfigField("boolean", "USAR_EMULADOR_FIREBASE", usarEmulador.toString())
+        }
         release {
+            // A versão publicada sempre usa o Firebase real
+            buildConfigField("boolean", "USAR_EMULADOR_FIREBASE", "false")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
