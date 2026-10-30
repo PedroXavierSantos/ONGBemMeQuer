@@ -38,4 +38,31 @@
     <string name="erroCarregarPerfil">Não foi possível carregar seu perfil. Tente novamente.</string>
     <string name="erroSalvarCadastro">Não foi possível concluir o cadastro. Tente novamente.</string>
     <string name="erroGenerico">Ocorreu um erro. Tente novamente.</string>
+
+    <!--Abas do paciente-->
+    <string name="abaInicio">Início</string>
+    <string name="abaAgenda">Agenda</string>
+    <string name="abaNoticias">Notícias</string>
+    <string name="abaDoacoes">Doações</string>
+    <string name="abaPerfil">Perfil</string>
+    <string name="emBreveDescricao">Esta área está em desenvolvimento e estará disponível em breve.</string>
+
+    <!--Aba Início-->
+    <string name="servicos">Serviços</string>
+    <string name="servicosDescricao">Conheça os atendimentos oferecidos pelo Centro de Desenvolvimento Bem Me Quer.</string>
+    <string name="servicoFisioterapia">Fisioterapia</string>
+    <string name="servicoPedagogia">Pedagogia</string>
+    <string name="servicoAnimais">Terapia Assistida por Animais</string>
+    <string name="servicoPsicologia">Psicologia</string>
+    <string name="servicoArtes">Artes</string>
+    <string name="facaUmaDoacao">Faça uma Doação</string>
+    <string name="centroDesenvolvimento">CENTRO DE DESENVOLVIMENTO</string>
+    <string name="bemMeQuer">Bem Me Quer</string>
+
+    <!--Aba Perfil-->
+    <string name="perfilTelefone">Telefone</string>
+    <string name="perfilPaciente">Paciente</string>
+    <string name="acompanharEvolucao">Acompanhar evolução</string>
+    <string name="carregando">Carregando…</string>
+    <string name="descricaoFotoPerfil">Foto do perfil</string>
 </resources>

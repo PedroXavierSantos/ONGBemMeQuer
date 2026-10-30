@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Estilos reaproveitados na aba Perfil (rótulo cinza em cima, valor preto embaixo).
+        Sem ponto no nome: no Android, "A.B" significa que B herda de um estilo A.-->
+    <style name="PerfilRotulo">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:textColor">@color/cinza_texto</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="PerfilValor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:text">@string/carregando</item>
+    </style>
+</resources>

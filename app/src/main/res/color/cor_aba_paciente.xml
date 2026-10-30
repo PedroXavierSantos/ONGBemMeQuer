@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Cor dos ícones e textos da barra inferior: azul na aba selecionada, cinza nas outras-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/azul_bem_me_quer" android:state_checked="true" />
+    <item android:color="@color/cinza_texto" />
+</selector>

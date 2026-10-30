@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Aba Início do paciente: logo, serviços da ONG e convite para doação (protótipo "Aba inicial")-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.paciente.InicioFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!--Cabeçalho amarelo com a logo-->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/amarelo_bem_me_quer">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:background="@drawable/fundo_branco_curvo"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="220dp"
+                    android:layout_height="90dp"
+                    android:contentDescription="@string/descricaoLogoOng"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logo_bmq" />
+            </LinearLayout>
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="@string/servicos"
+            android:textColor="@color/azul_bem_me_quer"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:text="@string/servicosDescricao"
+            android:textColor="@color/cinza_texto"
+            android:textSize="14sp" />
+
+        <!--Os cartões de serviço são criados no InicioFragment, a partir de uma lista-->
+        <GridLayout
+            android:id="@+id/grade_servicos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:columnCount="2"
+            android:paddingHorizontal="12dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_fazer_doacao"
+            android:layout_width="240dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/azul_bem_me_quer"
+            android:text="@string/facaUmaDoacao"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:icon="@drawable/ic_doacao"
+            app:iconTint="@color/white" />
+
+        <!--Rodapé azul com o nome da ONG-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/azul_bem_me_quer"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingVertical="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.1"
+                android:text="@string/centroDesenvolvimento"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bemMeQuer"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

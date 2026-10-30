@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Moldura do lado do paciente: a área do meio recebe a aba (Fragment) escolhida na barra inferior-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tela_principal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/amarelo_bem_me_quer"
+    android:background="@color/white"
     tools:context=".ui.mainPacienteActivity">
 
-    <!--Área onde ficará o conteúdo de cada aba (ocupa todo o espaço acima da barra inferior)-->
+    <!--Área onde cada aba é exibida (ocupa todo o espaço acima da barra inferior)-->
     <FrameLayout
         android:id="@+id/frame_container"
         android:layout_width="0dp"
@@ -16,24 +17,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
-
-        <Button
-            android:id="@+id/btn_logout_telaprincipal"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/roxo_bem_me_quer"
-            android:textColor="@color/white"
-            android:text="@string/Sair"/>
-    </FrameLayout>
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:background="@color/cream"
+        app:itemIconTint="@color/cor_aba_paciente"
+        app:itemTextColor="@color/cor_aba_paciente"
+        app:itemActiveIndicatorStyle="@null"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/menu_paciente"/>
+        app:menu="@menu/menu_paciente" />
 </androidx.constraintlayout.widget.ConstraintLayout>
