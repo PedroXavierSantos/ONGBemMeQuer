@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Cartão de um serviço na aba Início (ícone + nome)-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="@color/azul_claro_bem_me_quer"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minHeight="130dp"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/icone_servico"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@drawable/fundo_circulo_branco"
+            android:importantForAccessibility="no"
+            android:padding="12dp"
+            app:tint="@color/azul_bem_me_quer" />
+
+        <TextView
+            android:id="@+id/nome_servico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/azul_bem_me_quer"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

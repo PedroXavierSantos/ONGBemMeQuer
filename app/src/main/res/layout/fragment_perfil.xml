@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Aba Perfil do paciente: dados do cadastro, acompanhamento e Sair (protótipo "Aba de perfil")-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.paciente.PerfilFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginTop="16dp"
+            android:contentDescription="@string/descricaoFotoPerfil"
+            android:src="@drawable/ic_perfil"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/perfil_nome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@string/carregando"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!--Dados do cadastro (preenchidos pelo PerfilFragment)-->
+        <TextView
+            style="@style/PerfilRotulo"
+            android:text="@string/email" />
+
+        <TextView
+            android:id="@+id/perfil_email"
+            style="@style/PerfilValor" />
+
+        <TextView
+            style="@style/PerfilRotulo"
+            android:text="@string/perfilTelefone" />
+
+        <TextView
+            android:id="@+id/perfil_telefone"
+            style="@style/PerfilValor" />
+
+        <TextView
+            style="@style/PerfilRotulo"
+            android:text="@string/perfilPaciente" />
+
+        <TextView
+            android:id="@+id/perfil_paciente"
+            style="@style/PerfilValor" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_acompanhar_evolucao"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/azul_bem_me_quer"
+            android:text="@string/acompanharEvolucao"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_sair"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/vermelho_sair"
+            android:text="@string/Sair"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+</ScrollView>

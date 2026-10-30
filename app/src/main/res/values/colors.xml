@@ -6,4 +6,8 @@
     <color name="cream">#F7F8F9</color>
     <color name="amarelo_bem_me_quer">#F7C84B</color> <!--Tom de amarelo suave da ONG-->
     <color name="roxo_bem_me_quer">#5E62DB</color> <!--Tom de roxo suave da ONG-->
+    <color name="azul_bem_me_quer">#3A56A6</color> <!--Azul das telas do paciente no protótipo-->
+    <color name="azul_claro_bem_me_quer">#E8EDF8</color> <!--Fundo dos cartões de serviço-->
+    <color name="vermelho_sair">#E5483E</color> <!--Botão Sair do protótipo-->
+    <color name="cinza_texto">#5F6368</color>
 </resources>
