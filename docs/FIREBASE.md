@@ -3,7 +3,39 @@
 Este documento explica como o app usa o Firebase, como configurar o projeto no console
 e como testar tudo localmente sem mexer nos dados reais.
 
-Projeto Firebase: **`bemmequer-9ea2a571`**
+## Ambientes
+
+O app tem **dois projetos Firebase**, um para testes e outro para uso real:
+
+| Ambiente | Projeto Firebase | Usado pelo build | Branch |
+|---|---|---|---|
+| **Testes** | `bemmequer-dev` | **debug** (▶️ Run no Android Studio) | `dev` e `feat/...` |
+| **Produção** | `bemmequer-9ea2a571` | **release** (versão entregue à ONG) | `main` |
+
+Cada build escolhe o projeto pelo `google-services.json`:
+- `app/src/debug/google-services.json` → testes (o plugin do Google procura primeiro a pasta do tipo de build)
+- `app/google-services.json` → produção
+
+Os dois arquivos ficam **fora do git**. Para baixá-los: console do Firebase → ⚙️ Configurações do projeto →
+app Android → `google-services.json`, ou pela CLI:
+
+```bash
+npx firebase apps:sdkconfig ANDROID --project bemmequer-dev --out ../app/src/debug/google-services.json
+```
+
+As regras são publicadas **primeiro no projeto de testes** e só vão para produção quando a `dev` for para a `main`.
+Por segurança, o projeto padrão da CLI (`firebase/.firebaserc`) é o de **testes**; produção só com o comando
+que tem "producao" no nome (dentro da pasta `firebase`):
+
+```bash
+npm run deploy:regras
+```
+
+```bash
+npm run deploy:regras:producao
+```
+
+O fluxo de branches está em [FLUXO_DE_TRABALHO.md](FLUXO_DE_TRABALHO.md).
 
 ---
 
@@ -88,7 +120,8 @@ Pelo terminal (recomendado, publica exatamente o que está testado no repositór
 cd firebase
 npm install
 npx firebase login
-npm run deploy:regras
+npm run deploy:regras             # publica no projeto de TESTES (bemmequer-dev)
+npm run deploy:regras:producao    # publica no projeto REAL (só ao levar a dev para a main)
 ```
 
 Alternativa: copiar o conteúdo de `firebase/firestore.rules` para **Firestore Database → Regras** e clicar em **Publicar**.

@@ -5,7 +5,8 @@
   "scripts": {
     "emuladores": "firebase emulators:start",
     "test:regras": "firebase emulators:exec --only firestore --project demo-bemmequer \"node --test tests/*.test.js\"",
-    "deploy:regras": "firebase deploy --only firestore:rules,firestore:indexes"
+    "deploy:regras": "firebase deploy --only firestore:rules,firestore:indexes --project dev",
+    "deploy:regras:producao": "firebase deploy --only firestore:rules,firestore:indexes --project producao"
   },
   "type": "module",
   "devDependencies": {
