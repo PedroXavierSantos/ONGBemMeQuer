@@ -3,6 +3,7 @@
 # ===============================
 local.properties
 app/google-services.json
+app/src/*/google-services.json
 *.keystore
 *.jks
 
