@@ -65,4 +65,32 @@
     <string name="acompanharEvolucao">Acompanhar evolução</string>
     <string name="carregando">Carregando…</string>
     <string name="descricaoFotoPerfil">Foto do perfil</string>
+
+    <!--Lado do funcionário-->
+    <string name="olaNome">Olá, %1$s</string>
+    <string name="olaSemNome">Olá!</string>
+    <string name="funcionarioSubtitulo">O que você vai registrar hoje?</string>
+    <string name="relatorioDiario">Relatório Diário</string>
+    <string name="relatorioDiarioDescricao">Registre como foi o atendimento de um paciente. Só a família dele poderá ver.</string>
+    <string name="acompanhamento">Acompanhamento</string>
+    <string name="campoPaciente">Paciente</string>
+    <string name="campoRelato">Relato</string>
+    <string name="campoData">Data</string>
+    <string name="campoLocal">Local</string>
+    <string name="localPadrao">ONG</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="pacienteComResponsavel">%1$s (resp. %2$s)</string>
+    <string name="erroEscolherPaciente">Escolha um paciente da lista</string>
+    <string name="erroCarregarPacientes">Não foi possível carregar a lista de pacientes.</string>
+    <string name="semPacientes">Nenhum paciente cadastrado ainda.</string>
+    <string name="relatorioEnviado">Relatório enviado!</string>
+    <string name="erroEnviarRelatorio">Não foi possível enviar o relatório. Tente novamente.</string>
+
+    <!--Acompanhamento (lado da família)-->
+    <string name="acompanheEvolucao">Acompanhe a evolução</string>
+    <string name="acompanheEvolucaoDescricao">Relatórios diários escritos pela equipe da ONG.</string>
+    <string name="semRelatorios">Ainda não há relatórios. Eles aparecem aqui assim que a equipe registrar um atendimento.</string>
+    <string name="erroCarregarRelatorios">Não foi possível carregar os relatórios. Verifique a internet e tente novamente.</string>
+    <string name="relatorioAutorLocal">%1$s · %2$s</string>
+    <string name="voltar">Voltar</string>
 </resources>
