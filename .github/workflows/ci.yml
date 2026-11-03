@@ -1,10 +1,10 @@
-# Testes automáticos que rodam no GitHub a cada Pull Request e a cada push na main.
+# Testes automáticos que rodam no GitHub a cada Pull Request e a cada push na main e na dev.
 # O resultado aparece no próprio PR (✅ ou ❌) antes do merge.
 name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
   pull_request:
 
 # Se um novo push chegar na mesma branch, cancela a execução antiga
