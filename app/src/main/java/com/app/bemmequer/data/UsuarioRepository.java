@@ -4,6 +4,7 @@ package com.app.bemmequer.data;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
@@ -34,6 +35,14 @@ public class UsuarioRepository {
     //Método que busca os dados do usuário (usado para saber se é paciente ou funcionário)
     public void buscarUsuario(String uid, OnCompleteListener<DocumentSnapshot> listener) {
         db.collection(COLECAO_USUARIOS).document(uid)
+                .get()
+                .addOnCompleteListener(listener);
+    }
+
+    //Método que lista todos os pacientes (só funciona para funcionários, por causa das regras do Firestore)
+    public void listarPacientes(OnCompleteListener<QuerySnapshot> listener) {
+        db.collection(COLECAO_USUARIOS)
+                .whereEqualTo(CAMPO_TIPO, TIPO_PACIENTE)
                 .get()
                 .addOnCompleteListener(listener);
     }

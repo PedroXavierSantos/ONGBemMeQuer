@@ -54,9 +54,9 @@ public class PerfilFragment extends Fragment {
 
     //Método que configura todas as ações de clique
     private void configurarListeners(View view) {
-        //O acompanhamento (relatórios do paciente) será a próxima etapa
+        //Abre os relatórios diários do paciente ("Acompanhe a evolução")
         view.findViewById(R.id.btn_acompanhar_evolucao).setOnClickListener(v ->
-                Toast.makeText(requireContext(), R.string.emBreve, Toast.LENGTH_SHORT).show());
+                startActivity(new Intent(requireContext(), RelatoriosActivity.class)));
 
         view.findViewById(R.id.btn_sair).setOnClickListener(v -> sair());
     }
