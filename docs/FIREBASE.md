@@ -163,7 +163,7 @@ Proposta para as telas do protótipo. Cada coleção ganha regras e testes quand
 | `relatorios/{id}` | Relatório diário: paciente, profissional, relato, data, local | ✅ já implementado. Funcionário escreve; **só o responsável daquele paciente** lê; ninguém edita nem apaga pelo app |
 | `agendamentos/{id}` | Serviço, profissional, data, horário, status | Paciente cria/cancela os seus; funcionário confirma |
 | `triagens/{id}` | Pré-cadastro de quem quer entrar no projeto | Qualquer pessoa cria; só funcionário lê |
-| `pontos/{uid}/registros/{id}` | Ponto do funcionário (entrada, almoço, intervalo, saída, localização, selfie) | Só o próprio funcionário |
+| `pontos/{uid}/registros/{dia}_{tipo}` | Ponto do funcionário: tipo (entrada, almoço, intervalo, saída), dia e horário do servidor | ✅ versão simplificada (só horários). **Só o próprio funcionário** lê e grava; um registro de cada tipo por dia; ninguém edita nem apaga. Localização e selfie ficam para depois |
 | `noticias/{id}` | Notícias da ONG | Todos leem; só funcionário escreve |
 | `campanhas/{id}` | Abas sazonais (Páscoa, Natal...) com data de início/fim | Todos leem; só funcionário escreve |
 
