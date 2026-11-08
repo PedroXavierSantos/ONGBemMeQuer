@@ -86,6 +86,57 @@
     <string name="relatorioEnviado">Relatório enviado!</string>
     <string name="erroEnviarRelatorio">Não foi possível enviar o relatório. Tente novamente.</string>
 
+    <!--Tela inicial do funcionário: status, últimos dias e ponto-->
+    <string name="statusDeHoje">Status de Hoje</string>
+    <string name="ultimos15Dias">Últimos 15 dias</string>
+    <string name="controleDeTarefas">Controle de Tarefas</string>
+    <string name="relatorios">Relatórios</string>
+    <string name="barraExpediente">Andamento do expediente, das 8:00 às 18:00</string>
+    <string name="horarioInicioExpediente">8:00</string>
+    <string name="horarioFimExpediente">18:00</string>
+    <string name="situacaoNaoIniciado">Expediente ainda não iniciado</string>
+    <string name="situacaoTrabalhando">Em expediente desde %1$s</string>
+    <string name="situacaoAlmoco">No almoço desde %1$s</string>
+    <string name="situacaoIntervalo">No intervalo desde %1$s</string>
+    <string name="situacaoEncerrado">Expediente encerrado às %1$s</string>
+    <string name="erroCarregarPonto">Não foi possível carregar o ponto. Verifique a internet.</string>
+    <string name="diaSemRegistro">Sem registro</string>
+    <string name="diaIncompleto">Incompleto</string>
+    <string name="diaCompleto">Completo</string>
+    <string name="tarefaInicioExpediente">Início de Expediente</string>
+    <string name="tarefaAlmoco">Almoço</string>
+    <string name="tarefaIntervalo">Intervalo</string>
+    <string name="tarefaFimExpediente">Fim de Expediente</string>
+    <string name="horarioPrevistoEntrada">8:00</string>
+    <string name="horarioPrevistoAlmoco">12:00 – 13:00</string>
+    <string name="horarioPrevistoIntervalo">15:00 – 15:30</string>
+    <string name="horarioPrevistoSaida">18:00</string>
+    <string name="iniciar">Iniciar</string>
+    <string name="concluido">Feito</string>
+    <string name="registradoAs">Registrado às %1$s</string>
+    <string name="iniciadoAs">Iniciado às %1$s</string>
+    <string name="iniciadoEFinalizado">%1$s – %2$s</string>
+    <string name="confirmarPontoTitulo">Registrar ponto</string>
+    <string name="confirmarPontoMensagem">%1$s às %2$s.\n\nO horário será gravado e não poderá ser alterado depois.</string>
+    <string name="pontoEntrada">Início de expediente</string>
+    <string name="pontoAlmocoInicio">Início do almoço</string>
+    <string name="pontoAlmocoFim">Fim do almoço</string>
+    <string name="pontoIntervaloInicio">Início do intervalo</string>
+    <string name="pontoIntervaloFim">Fim do intervalo</string>
+    <string name="pontoSaida">Fim de expediente</string>
+    <string name="registrar">Registrar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="pontoRegistrado">Ponto registrado!</string>
+    <string name="erroRegistrarPonto">Não foi possível registrar o ponto. Tente novamente.</string>
+    <string name="localizacaoEmBreve">Localização (em breve)</string>
+    <string name="selfieEmBreve">Selfie (em breve)</string>
+    <string name="localizacaoSelfieEmBreve">Localização e selfie no ponto chegam numa próxima versão.</string>
+
+    <!--Relatórios escritos pelo funcionário-->
+    <string name="meusRelatorios">Meus relatórios</string>
+    <string name="meusRelatoriosDescricao">Relatórios diários que você já enviou.</string>
+    <string name="semMeusRelatorios">Você ainda não enviou nenhum relatório.</string>
+
     <!--Acompanhamento (lado da família)-->
     <string name="acompanheEvolucao">Acompanhe a evolução</string>
     <string name="acompanheEvolucaoDescricao">Relatórios diários escritos pela equipe da ONG.</string>

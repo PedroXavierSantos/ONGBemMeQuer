@@ -18,4 +18,15 @@
         <item name="android:textSize">17sp</item>
         <item name="android:text">@string/carregando</item>
     </style>
+
+    <!--Título roxo de cada seção da tela inicial do funcionário (Status de Hoje, Últimos 15 dias...)-->
+    <style name="TituloSecaoFuncionario">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">24dp</item>
+        <item name="android:layout_marginTop">24dp</item>
+        <item name="android:textColor">@color/roxo_bem_me_quer</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

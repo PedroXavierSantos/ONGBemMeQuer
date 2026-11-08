@@ -33,6 +33,9 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
+            android:name=".ui.funcionario.MeusRelatoriosActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.loginActivity"
             android:exported="true">
             <intent-filter>

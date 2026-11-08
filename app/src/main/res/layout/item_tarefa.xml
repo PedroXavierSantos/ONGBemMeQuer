@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Uma linha do "Controle de Tarefas" (Início, Almoço, Intervalo, Fim de Expediente).
+    Este layout é incluído 4 vezes em activity_main_funcionario.xml com <include>.-->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginTop="12dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/roxo_claro_bem_me_quer"
+    app:strokeWidth="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tarefa_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                tools:text="Almoço" />
+
+            <TextView
+                android:id="@+id/tarefa_horario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cinza_texto"
+                android:textSize="14sp"
+                tools:text="12:00 – 13:00" />
+
+            <!--Horários já registrados hoje (ex.: "Iniciado às 12:03")-->
+            <TextView
+                android:id="@+id/tarefa_registrado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/roxo_bem_me_quer"
+                android:textSize="13sp"
+                android:visibility="gone"
+                tools:text="Iniciado às 12:03"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <!--Localização e selfie: aparecem como no protótipo, mas chegam numa próxima versão-->
+        <ImageView
+            android:id="@+id/tarefa_localizacao"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/localizacaoEmBreve"
+            android:padding="8dp"
+            android:src="@drawable/ic_localizacao"
+            app:tint="@color/roxo_bem_me_quer" />
+
+        <ImageView
+            android:id="@+id/tarefa_camera"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/selfieEmBreve"
+            android:padding="8dp"
+            android:src="@drawable/ic_camera"
+            app:tint="@color/roxo_bem_me_quer" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tarefa_botao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:minWidth="104dp"
+            android:textColor="@color/white"
+            app:cornerRadius="12dp"
+            tools:text="@string/iniciar" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

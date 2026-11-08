@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--Tela inicial do funcionário: saudação, atalho para o relatório diário e Sair (protótipo "Aba inicial" do colaborador)-->
+<!--Tela inicial do funcionário (protótipo "Aba inicial" do colaborador):
+    saudação, Status de Hoje, Últimos 15 dias, Controle de Tarefas (ponto), Relatório Diário e rodapé-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -10,126 +11,273 @@
     android:orientation="vertical"
     tools:context=".ui.MainFuncionarioActivity">
 
-    <!--Cabeçalho roxo com a saudação-->
-    <LinearLayout
+    <!--Tudo que rola fica dentro do ScrollView; o rodapé fica fixo embaixo-->
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/roxo_bem_me_quer"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="24dp">
-
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:contentDescription="@string/descricaoFotoPerfil"
-            android:src="@drawable/ic_perfil"
-            app:tint="@color/white" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/funcionario_ola"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/olaSemNome"
-                android:textColor="@color/white"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/funcionarioSubtitulo"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/acompanhamento"
-        android:textColor="@color/roxo_bem_me_quer"
-        android:textSize="20sp"
-        android:textStyle="bold" />
-
-    <!--Atalho para escrever um relatório diário-->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_relatorio_diario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="12dp"
-        android:clickable="true"
-        android:focusable="true"
-        app:cardBackgroundColor="@color/roxo_claro_bem_me_quer"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp"
-        app:strokeWidth="0dp">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="20dp">
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
 
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/fundo_circulo_branco"
-                android:importantForAccessibility="no"
-                android:padding="10dp"
-                android:src="@drawable/ic_noticias"
-                app:tint="@color/roxo_bem_me_quer" />
-
+            <!--Cabeçalho roxo com a foto e a saudação-->
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                android:background="@color/roxo_bem_me_quer"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="24dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/relatorioDiario"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/fundo_circulo_branco"
+                    android:contentDescription="@string/descricaoFotoPerfil"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_perfil"
+                    app:tint="@color/roxo_bem_me_quer" />
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="@string/relatorioDiarioDescricao"
-                    android:textColor="@color/cinza_texto"
-                    android:textSize="14sp" />
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/funcionario_ola"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/olaSemNome"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/funcionarioSubtitulo"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
+
+            <!--STATUS DE HOJE-->
+            <TextView
+                style="@style/TituloSecaoFuncionario"
+                android:text="@string/statusDeHoje" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/roxo_claro_bem_me_quer"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/status_hoje_data"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Terça-feira, 10 de novembro" />
+
+                    <TextView
+                        android:id="@+id/status_hoje_situacao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/carregando"
+                        android:textColor="@color/cinza_texto"
+                        android:textSize="14sp" />
+
+                    <!--Barra do expediente: vai enchendo das 8:00 às 18:00-->
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/barra_expediente"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:contentDescription="@string/barraExpediente"
+                        android:max="100"
+                        app:indicatorColor="@color/roxo_bem_me_quer"
+                        app:trackColor="@color/white"
+                        app:trackCornerRadius="6dp"
+                        app:trackThickness="10dp"
+                        tools:progress="40" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/horarioInicioExpediente"
+                            android:textColor="@color/cinza_texto"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/horarioFimExpediente"
+                            android:textColor="@color/cinza_texto"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--ÚLTIMOS 15 DIAS: os cartões são criados pelo código (MainFuncionarioActivity)-->
+            <TextView
+                style="@style/TituloSecaoFuncionario"
+                android:text="@string/ultimos15Dias" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:clipToPadding="false"
+                android:paddingHorizontal="24dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/lista_dias"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <!--CONTROLE DE TAREFAS (ponto simplificado: só os horários)-->
+            <TextView
+                style="@style/TituloSecaoFuncionario"
+                android:text="@string/controleDeTarefas" />
+
+            <include
+                android:id="@+id/tarefa_entrada"
+                layout="@layout/item_tarefa" />
+
+            <include
+                android:id="@+id/tarefa_almoco"
+                layout="@layout/item_tarefa" />
+
+            <include
+                android:id="@+id/tarefa_intervalo"
+                layout="@layout/item_tarefa" />
+
+            <include
+                android:id="@+id/tarefa_saida"
+                layout="@layout/item_tarefa" />
+
+            <!--ACOMPANHAMENTO: atalho para escrever um relatório diário-->
+            <TextView
+                style="@style/TituloSecaoFuncionario"
+                android:text="@string/acompanhamento" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_relatorio_diario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/roxo_claro_bem_me_quer"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:background="@drawable/fundo_circulo_branco"
+                        android:importantForAccessibility="no"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_noticias"
+                        app:tint="@color/roxo_bem_me_quer" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/relatorioDiario"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="@string/relatorioDiarioDescricao"
+                            android:textColor="@color/cinza_texto"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.core.widget.NestedScrollView>
 
-    <!--Espaço vazio que empurra o botão Sair para o fim da tela-->
-    <Space
+    <!--RODAPÉ fixo: Relatórios (lista dos que o funcionário escreveu) e Sair-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="8dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_logout_funcionario"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_margin="24dp"
-        android:backgroundTint="@color/vermelho_sair"
-        android:text="@string/Sair"
-        android:textColor="@color/white"
-        android:textSize="16sp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_relatorios"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/roxo_bem_me_quer"
+            android:text="@string/relatorios"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:icon="@drawable/ic_noticias"
+            app:iconTint="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_logout_funcionario"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/vermelho_sair"
+            android:text="@string/Sair"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
 </LinearLayout>
