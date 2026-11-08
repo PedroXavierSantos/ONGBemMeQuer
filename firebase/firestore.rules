@@ -66,5 +66,39 @@ service cloud.firestore {
       // Exclusão de contas só pela administração
       allow delete: if false;
     }
+
+    // RELATÓRIOS DIÁRIOS: relatorios/{relatorioId}
+    // O funcionário escreve; só a família daquele paciente (e os funcionários) podem ler.
+    function ehPaciente(uid) {
+      return get(/databases/$(database)/documents/usuarios/$(uid)).data.tipo == 'paciente';
+    }
+
+    match /relatorios/{relatorioId} {
+      // A família lê só os relatórios em que ela é o pacienteUid.
+      // Para listar, o app precisa filtrar por pacienteUid == próprio UID (senão a consulta é negada).
+      allow read: if ehFuncionario()
+        || (estaLogado() && resource.data.pacienteUid == request.auth.uid);
+
+      // Só funcionário cria, sempre em nome próprio, para um paciente que existe
+      allow create: if ehFuncionario()
+        && request.resource.data.keys().hasOnly([
+             'pacienteUid', 'nomePaciente', 'funcionarioUid', 'nomeFuncionario',
+             'relato', 'data', 'local', 'criadoEm'])
+        && request.resource.data.keys().hasAll([
+             'pacienteUid', 'nomePaciente', 'funcionarioUid', 'nomeFuncionario',
+             'relato', 'data', 'local', 'criadoEm'])
+        && request.resource.data.funcionarioUid == request.auth.uid
+        && request.resource.data.pacienteUid is string
+        && ehPaciente(request.resource.data.pacienteUid)
+        && textoObrigatorio(request.resource.data.nomePaciente, 100)
+        && textoObrigatorio(request.resource.data.nomeFuncionario, 100)
+        && textoObrigatorio(request.resource.data.relato, 2000)
+        && textoObrigatorio(request.resource.data.local, 100)
+        && request.resource.data.data is timestamp
+        && request.resource.data.criadoEm == request.time;
+
+      // Relatório entregue não é alterado nem apagado pelo app (histórico confiável)
+      allow update, delete: if false;
+    }
   }
 }

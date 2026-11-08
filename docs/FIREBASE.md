@@ -140,6 +140,16 @@ Os dados dos emuladores são apagados quando eles são fechados.
 
 > **Windows:** se aparecer `port taken` ao subir os emuladores, um emulador anterior ficou aberto.
 > Feche o processo `java` que usa a porta 8080 (Gerenciador de Tarefas) e tente de novo.
+>
+> **Windows:** se o emulador do Firestore fechar sozinho com o código `3221225786` logo que o emulador
+> do Android liga, os dois estão no mesmo terminal e o Android "derruba" o Firebase. Rode o
+> `npm run emuladores` em uma **janela de terminal separada** (ou ligue o emulador do Android antes).
+
+### 4.3 Índices
+Consultas que filtram por um campo e ordenam por outro precisam de um **índice composto**, declarado
+em `firebase/firestore.indexes.json` e publicado junto com as regras (`npm run deploy:regras`).
+Exemplo: a lista de relatórios da família filtra por `pacienteUid` e ordena por `data`.
+Os emuladores não exigem índices; o Firebase real sim (sem o índice, a consulta falha).
 
 ---
 
@@ -150,7 +160,7 @@ Proposta para as telas do protótipo. Cada coleção ganha regras e testes quand
 | Coleção | Conteúdo | Quem lê / escreve |
 |---|---|---|
 | `usuarios/{uid}` | Perfil (paciente ou funcionário) | ✅ já implementado |
-| `relatorios/{id}` | Relatório diário: paciente, profissional, relato, data, local | Funcionário escreve; **só o responsável daquele paciente** lê |
+| `relatorios/{id}` | Relatório diário: paciente, profissional, relato, data, local | ✅ já implementado. Funcionário escreve; **só o responsável daquele paciente** lê; ninguém edita nem apaga pelo app |
 | `agendamentos/{id}` | Serviço, profissional, data, horário, status | Paciente cria/cancela os seus; funcionário confirma |
 | `triagens/{id}` | Pré-cadastro de quem quer entrar no projeto | Qualquer pessoa cria; só funcionário lê |
 | `pontos/{uid}/registros/{id}` | Ponto do funcionário (entrada, almoço, intervalo, saída, localização, selfie) | Só o próprio funcionário |
