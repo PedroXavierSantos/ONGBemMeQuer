@@ -10,4 +10,6 @@
     <color name="azul_claro_bem_me_quer">#E8EDF8</color> <!--Fundo dos cartões de serviço-->
     <color name="vermelho_sair">#E5483E</color> <!--Botão Sair do protótipo-->
     <color name="cinza_texto">#5F6368</color>
+    <color name="roxo_claro_bem_me_quer">#EEEEFC</color> <!--Fundo claro do lado do funcionário-->
+    <color name="verde_finalizar">#2EAD4B</color> <!--Botão Finalizar do protótipo-->
 </resources>

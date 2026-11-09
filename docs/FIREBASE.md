@@ -63,6 +63,7 @@ Funcionários não se cadastram pelo app. Em cada projeto (testes ou produção)
 
 ## Configurar um projeto do zero
 
+
 1. **Authentication → Sign-in method:** ativar E-mail/senha.
 2. **Firestore Database → Criar banco:** edição Standard, ID `(default)`, local `southamerica-east1`
    (não pode ser mudado depois), modo de produção.

@@ -26,6 +26,13 @@
             android:name=".ui.mainPacienteActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.paciente.RelatoriosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.funcionario.NovoRelatorioActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
             android:name=".ui.loginActivity"
             android:exported="true">
             <intent-filter>
