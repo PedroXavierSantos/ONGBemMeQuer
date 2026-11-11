@@ -13,6 +13,7 @@ Uma ADR aceita não é reescrita: se a decisão mudar, crie uma nova que a subst
 | [0005](0005-ambientes-de-testes-e-producao.md) | Dois projetos Firebase: testes e produção | Aceita | 2026-11-02 |
 | [0006](0006-fluxo-main-dev-tarefas.md) | Fluxo de branches `main` → `dev` → tarefas, com proteção | Aceita | 2026-11-02 |
 | [0007](0007-documentacao-enxuta.md) | Documentação enxuta no repositório | Aceita | 2026-11-02 |
+| [0008](0008-pdf-do-relatorio-gerado-no-aparelho.md) | PDF do relatório gerado no aparelho, sem arquivo guardado | Aceita | 2026-11-10 |
 
 ## Como registrar uma decisão
 

@@ -17,6 +17,7 @@ import com.app.bemmequer.R;
 import com.app.bemmequer.auth.AuthManager;
 import com.app.bemmequer.data.Relatorio;
 import com.app.bemmequer.data.RelatorioRepository;
+import com.app.bemmequer.ui.CompartilhadorDeRelatorio;
 import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
@@ -69,7 +70,9 @@ public class RelatoriosActivity extends AppCompatActivity {
                 mostrarMensagem(R.string.semRelatorios);
                 return;
             }
-            listaRelatorios.setAdapter(new RelatorioAdapter(relatorios));
+            //O terceiro parâmetro é o que acontece ao tocar em "Compartilhar PDF" num cartão
+            listaRelatorios.setAdapter(new RelatorioAdapter(relatorios, false,
+                    relatorio -> CompartilhadorDeRelatorio.compartilhar(this, relatorio)));
             listaRelatorios.setVisibility(View.VISIBLE);
         });
     }

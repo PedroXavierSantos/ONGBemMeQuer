@@ -44,6 +44,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!--Empresta um arquivo do cache (o PDF do relatório) para outro app, só para leitura e só
+            enquanto durar o compartilhamento. As pastas liberadas estão em res/xml/caminhos_compartilhados.xml-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/caminhos_compartilhados" />
+        </provider>
     </application>
 
 </manifest>

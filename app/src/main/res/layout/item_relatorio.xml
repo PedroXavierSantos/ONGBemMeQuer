@@ -39,5 +39,20 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/black"
             android:textSize="15sp" />
+
+        <!--Gera o PDF deste relatório e abre a folha de compartilhamento.
+            Fica escondido até o adapter receber a ação do botão (ver RelatorioAdapter).-->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/item_relatorio_compartilhar"
+            style="@style/Widget.Material3.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="4dp"
+            android:text="@string/compartilharPdf"
+            android:textColor="@color/azul_bem_me_quer"
+            android:visibility="gone"
+            app:icon="@drawable/ic_compartilhar"
+            app:iconTint="@color/azul_bem_me_quer" />
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

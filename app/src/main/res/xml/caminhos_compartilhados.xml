@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Pastas que o FileProvider pode emprestar para outros apps.
+    Só a pasta dos PDFs de relatório, dentro do cache do app (a mesma de RelatorioPdf.PASTA).-->
+<paths>
+    <cache-path
+        name="relatorios_pdf"
+        path="relatorios_pdf/" />
+</paths>

@@ -3,8 +3,10 @@ package com.app.bemmequer.data;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 //Representa um relatório diário (documento da coleção "relatorios" no Firestore)
@@ -64,6 +66,16 @@ public class Relatorio {
         dados.put(CAMPO_DATA, new Timestamp(data));
         dados.put(CAMPO_LOCAL, local);
         return dados;
+    }
+
+    //Método que escreve a data por extenso, com a primeira letra maiúscula
+    //(ex.: Sexta-feira, 30 de outubro de 2026). Usado no cartão da lista e no PDF.
+    public String dataPorExtenso() {
+        if (data == null) {
+            return "";
+        }
+        String texto = new SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy", new Locale("pt", "BR")).format(data);
+        return Character.toUpperCase(texto.charAt(0)) + texto.substring(1); //O Java escreve "sexta-feira"
     }
 
     public String getNomePaciente() {
