@@ -144,4 +144,16 @@
     <string name="erroCarregarRelatorios">Não foi possível carregar os relatórios. Verifique a internet e tente novamente.</string>
     <string name="relatorioAutorLocal">%1$s · %2$s</string>
     <string name="voltar">Voltar</string>
+
+    <!--PDF do relatório diário-->
+    <string name="compartilharPdf">Compartilhar PDF</string>
+    <string name="compartilharRelatorioTitulo">Compartilhar relatório</string>
+    <string name="assuntoRelatorioPdf">Relatório diário de %1$s</string>
+    <string name="erroGerarPdf">Não foi possível gerar o PDF. Tente novamente.</string>
+    <string name="erroSemAppParaCompartilhar">Nenhum aplicativo disponível para compartilhar o PDF.</string>
+    <string name="pdfNomeOng">CENTRO DE DESENVOLVIMENTO BEM ME QUER</string>
+    <string name="pdfProfissional">Profissional</string>
+    <string name="pdfCabecalhoContinuacao">Relatório diário · %1$s · %2$s</string>
+    <string name="pdfRodapeGerado">Documento gerado pelo aplicativo Bem Me Quer em %1$s</string>
+    <string name="pdfPagina">Página %1$d de %2$d</string>
 </resources>
