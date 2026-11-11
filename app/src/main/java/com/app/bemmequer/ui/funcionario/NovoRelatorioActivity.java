@@ -95,6 +95,7 @@ public class NovoRelatorioActivity extends AppCompatActivity {
             layoutPaciente.setError(null);
         });
         campoData.setOnClickListener(v -> abrirCalendario());
+        findViewById(R.id.btn_voltar).setOnClickListener(v -> finish()); //Volta sem enviar o relatório
         btnFinalizar.setOnClickListener(v -> validarEEnviar());
     }
 

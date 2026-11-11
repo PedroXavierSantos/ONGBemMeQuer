@@ -46,6 +46,7 @@ public class MeusRelatoriosActivity extends AppCompatActivity {
         carregando = findViewById(R.id.carregando_meus_relatorios);
         mensagem = findViewById(R.id.mensagem_meus_relatorios);
         listaRelatorios.setLayoutManager(new LinearLayoutManager(this));
+        findViewById(R.id.btn_voltar).setOnClickListener(v -> finish()); //Fecha esta tela e volta para a anterior
 
         carregarRelatorios();
     }
