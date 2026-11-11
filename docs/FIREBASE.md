@@ -46,12 +46,13 @@ processos do mesmo terminal.
 | --- | --- | --- | --- | --- |
 | `usuarios/{uid}` | Perfil: `tipo` (`paciente` ou `funcionario`), nomes, telefone, e-mail | O próprio usuário ou funcionário | O próprio, sempre como `paciente` | O próprio, sem mudar `tipo`, `email`, `criadoEm` / ninguém |
 | `relatorios/{id}` | Relatório diário: `pacienteUid`, relato, `data`, local, autor | Funcionário ou a família do `pacienteUid` | Só funcionário, em nome próprio | Ninguém |
+| `pontos/{uid}/registros/{dia}_{tipo}` | Ponto do funcionário: `tipo` (entrada, almoço, intervalo, saída), `dia` e horário do servidor | Só o próprio funcionário | Só o próprio funcionário, um registro de cada tipo por dia, na ordem do expediente | Ninguém |
 
 Toda coleção nova começa bloqueada e ganha regras e testes no mesmo Pull Request que a usa. Consultas que
 filtram por um campo e ordenam por outro precisam de índice em `firebase/firestore.indexes.json`.
 
-**Planejadas:** `agendamentos`, `triagens`, `pontos/{uid}/registros`, `noticias` e `campanhas`. Fotos (selfie do
-ponto, imagens de notícias) irão para o Cloud Storage, com o caminho do arquivo no Firestore.
+**Planejadas:** `agendamentos`, `triagens`, `noticias` e `campanhas`, além da localização e da selfie no ponto.
+Fotos (selfie do ponto, imagens de notícias) irão para o Cloud Storage, com o caminho do arquivo no Firestore.
 
 ## Contas de funcionário
 

@@ -100,5 +100,43 @@ service cloud.firestore {
       // Relatório entregue não é alterado nem apagado pelo app (histórico confiável)
       allow update, delete: if false;
     }
+
+    // PONTO DO FUNCIONÁRIO: pontos/{uid}/registros/{dia}_{tipo}
+    // Versão simplificada: guarda só o horário (localização e selfie ficam para depois).
+    // O ID do documento é "dia_tipo" (ex.: 2026-11-10_entrada), então cada registro só existe
+    // uma vez por dia: gravar de novo no mesmo ID vira "update", que é sempre negado.
+    function registroDoDia(uid, dia, tipo) {
+      return /databases/$(database)/documents/pontos/$(uid)/registros/$(dia + '_' + tipo);
+    }
+
+    // Ordem do dia: entrada antes de tudo; o fim do almoço/intervalo só depois do início
+    function requisitoCumprido(uid, dia, tipo) {
+      return tipo == 'entrada'
+        || (tipo == 'almoco_fim' && exists(registroDoDia(uid, dia, 'almoco_inicio')))
+        || (tipo == 'intervalo_fim' && exists(registroDoDia(uid, dia, 'intervalo_inicio')))
+        || (tipo in ['almoco_inicio', 'intervalo_inicio', 'saida']
+            && exists(registroDoDia(uid, dia, 'entrada')));
+    }
+
+    match /pontos/{uid}/registros/{registroId} {
+      // Só o próprio funcionário vê o próprio ponto
+      allow read: if ehOProprioUsuario(uid);
+
+      allow create: if ehOProprioUsuario(uid)
+        && ehFuncionario()
+        && request.resource.data.keys().hasOnly(['tipo', 'dia', 'horario'])
+        && request.resource.data.keys().hasAll(['tipo', 'dia', 'horario'])
+        && request.resource.data.tipo in [
+             'entrada', 'almoco_inicio', 'almoco_fim', 'intervalo_inicio', 'intervalo_fim', 'saida']
+        && request.resource.data.dia is string
+        && request.resource.data.dia.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && registroId == request.resource.data.dia + '_' + request.resource.data.tipo
+        // O horário é sempre o do servidor: o celular não consegue "voltar o relógio"
+        && request.resource.data.horario == request.time
+        && requisitoCumprido(uid, request.resource.data.dia, request.resource.data.tipo);
+
+      // Ponto batido não é alterado nem apagado pelo app
+      allow update, delete: if false;
+    }
   }
 }

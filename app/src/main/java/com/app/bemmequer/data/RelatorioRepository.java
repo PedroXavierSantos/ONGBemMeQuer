@@ -42,4 +42,14 @@ public class RelatorioRepository {
                 .get()
                 .addOnCompleteListener(listener);
     }
+
+    //Método que lista os relatórios escritos por um funcionário ("Meus relatórios").
+    //Sem orderBy de propósito: filtrar por um campo e ordenar por outro exigiria um índice novo
+    //no Firebase; como a lista é pequena, quem ordena por data é a tela (MeusRelatoriosActivity).
+    public void listarRelatoriosDoFuncionario(String funcionarioUid, OnCompleteListener<QuerySnapshot> listener) {
+        db.collection(COLECAO_RELATORIOS)
+                .whereEqualTo(Relatorio.CAMPO_FUNCIONARIO_UID, funcionarioUid)
+                .get()
+                .addOnCompleteListener(listener);
+    }
 }

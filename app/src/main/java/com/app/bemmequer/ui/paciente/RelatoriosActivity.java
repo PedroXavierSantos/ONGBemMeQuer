@@ -35,6 +35,7 @@ public class RelatoriosActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_relatorios);
         configurarInsets();
+        findViewById(R.id.btn_voltar).setOnClickListener(v -> finish()); //Fecha esta tela e volta para a anterior
 
         listaRelatorios = findViewById(R.id.lista_relatorios);
         carregando = findViewById(R.id.carregando_relatorios);

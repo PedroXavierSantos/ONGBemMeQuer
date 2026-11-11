@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.bemmequer.R;
 import com.app.bemmequer.data.Relatorio;
+import com.google.android.material.card.MaterialCardView;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -17,15 +19,24 @@ import java.util.Locale;
 
 //Adapter: a "ponte" entre a lista de relatórios e a RecyclerView.
 //A RecyclerView só cria os cartões que cabem na tela e os reaproveita ao rolar.
+//É usado em dois lugares: na lista da família (azul) e em "Meus relatórios" do funcionário (roxo).
 public class RelatorioAdapter extends RecyclerView.Adapter<RelatorioAdapter.CartaoRelatorio> {
     //Data por extenso no topo do cartão (ex.: quinta-feira, 30 de outubro de 2026)
     private static final SimpleDateFormat FORMATO_DATA =
             new SimpleDateFormat("EEEE, d 'de' MMMM 'de' yyyy", new Locale("pt", "BR"));
 
     private final List<Relatorio> relatorios;
+    //true na tela do funcionário: mostra o nome do PACIENTE (o autor é ele mesmo) e usa as cores roxas
+    private final boolean modoFuncionario;
 
+    //Lista da família
     public RelatorioAdapter(List<Relatorio> relatorios) {
+        this(relatorios, false);
+    }
+
+    public RelatorioAdapter(List<Relatorio> relatorios, boolean modoFuncionario) {
         this.relatorios = relatorios;
+        this.modoFuncionario = modoFuncionario;
     }
 
     //Cria um cartão vazio (chamado só algumas vezes, os cartões são reaproveitados)
@@ -33,6 +44,12 @@ public class RelatorioAdapter extends RecyclerView.Adapter<RelatorioAdapter.Cart
     @Override
     public CartaoRelatorio onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View cartao = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_relatorio, parent, false);
+        if (modoFuncionario) {
+            ((MaterialCardView) cartao).setCardBackgroundColor(
+                    ContextCompat.getColor(parent.getContext(), R.color.roxo_claro_bem_me_quer));
+            ((TextView) cartao.findViewById(R.id.item_relatorio_data)).setTextColor(
+                    ContextCompat.getColor(parent.getContext(), R.color.roxo_bem_me_quer));
+        }
         return new CartaoRelatorio(cartao);
     }
 
@@ -43,8 +60,9 @@ public class RelatorioAdapter extends RecyclerView.Adapter<RelatorioAdapter.Cart
         String data = relatorio.getData() == null ? "" : FORMATO_DATA.format(relatorio.getData());
         //Deixa a primeira letra maiúscula (o Java escreve "quinta-feira")
         cartao.data.setText(data.isEmpty() ? data : Character.toUpperCase(data.charAt(0)) + data.substring(1));
+        String pessoa = modoFuncionario ? relatorio.getNomePaciente() : relatorio.getNomeFuncionario();
         cartao.autor.setText(cartao.itemView.getContext().getString(R.string.relatorioAutorLocal,
-                relatorio.getNomeFuncionario(), relatorio.getLocal()));
+                pessoa, relatorio.getLocal()));
         cartao.relato.setText(relatorio.getRelato());
     }
 
